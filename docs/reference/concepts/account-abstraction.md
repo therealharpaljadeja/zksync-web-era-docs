@@ -170,7 +170,7 @@ This is the standard that is endorsed by the zkSync team. It is used in the sign
 ### The deployment process
 
 The process of deploying account logic is very similar to the one of deploying a smart contract.
-In order to protect smart contracts that do not want to be treated as an account, a different method of the deployer system contract should be used to do it.
+In order to protect smart contracts that do not want to be treated as a contract, a different method of the deployer system contract should be used to do it.
 Instead of using `create`/`create2`, you should use the `createAccount`/`create2Account` methods of the deployer system contract.
 
 Here is an example of how to deploy account logic using the `zksync-web3` SDK:
