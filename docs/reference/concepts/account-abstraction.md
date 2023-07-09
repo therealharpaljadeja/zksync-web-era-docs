@@ -87,14 +87,6 @@ Each paymaster should implement the [IPaymaster](https://github.com/matter-labs/
 - `validateAndPayForPaymasterTransaction` is mandatory and will be used by the system to determine if the paymaster approves paying for this transaction. If the paymaster is willing to pay for the transaction, this method must send at least `tx.gasprice * tx.gasLimit` to the operator. It should return the `context` that will be one of the call parameters to the `postTransaction` method.
 - `postTransaction` is optional and is called after the transaction executes. Note that unlike EIP4337, there _is no guarantee that this method will be called_. In particular, this method won't be called if the transaction fails with `out of gas` error. It takes four parameters: the context returned by `validateAndPayForPaymasterTransaction`, the transaction itself, a flag that indicates whether the transaction execution succeeded, and the maximum amount of gas the paymaster might be refunded with.
 
-### Reserved fields of the `Transaction` struct with special meaning
-
-Note that each of the methods above accept the [Transaction](https://github.com/matter-labs/v2-testnet-contracts/blob/main/l2/system-contracts/libraries/TransactionHelper.sol#L76) struct.
-While some of its fields are self-explanatory, there are also 6 `reserved` fields, the meaning of each is defined by the transaction's type. We decided to not give these fields names, since they might be unneeded in some future transaction types. For now, the convention is:
-
-- `reserved[0]` is the nonce.
-- `reserved[1]` is `msg.value` that should be passed with the transaction.
-
 ### The transaction flow
 
 Each transaction goes through the following flow:
